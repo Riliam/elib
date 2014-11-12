@@ -3,11 +3,23 @@
 {% block content %}
 
   {% for book in books %}
-    <p>{{book}}</p>
+  <div>"{{book.title}}": 
+    {% for author in book.authors %}
+      {{author.name}}
+    {% endfor %}
+  </div>
+
   {% endfor %}
 
+  <br>
+
   {% for author in authors %}
-    <p>{{author}}</p>
+    <div>
+    {{author.name}}
+    {% for book in author.books %}
+      "{{book.title}}"
+    {% endfor %}
+    </div>
   {% endfor %}
 
 {% endblock %}

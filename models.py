@@ -1,5 +1,12 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy.orm import relationship
+
 from database import Base
+
+author_book = Table('author_book', Base.metadata,
+                          Column('book_id', Integer, ForeignKey('book.id')),
+                          Column('author_id', Integer, ForeignKey('author.id'))
+                         )
 
 class Book(Base):
     __tablename__ = 'book'
@@ -17,6 +24,7 @@ class Author(Base):
     __tablename__ = 'author'
     id = Column(Integer, primary_key=True)
     name = Column(String(128), unique=True)
+    books = relationship('Book', secondary=author_book, backref='authors')
 
     def __init__(self, name):
         self.name = name
