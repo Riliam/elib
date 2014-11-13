@@ -1,0 +1,11 @@
+{% for author in authors %}
+<div>
+  <div>
+    {{author.name}}
+  </div>
+  <div>
+    Книги этого автора: {{author.get_booktitles_list()|join(', ')}}
+  </div>
+</div>
+<br>
+{% endfor %}

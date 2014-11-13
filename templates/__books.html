@@ -1,0 +1,11 @@
+{% for book in books %}
+<div>
+  <div>
+    "{{book.title}}" 
+  </div>
+  <div>
+    Авторы: {{book.get_authornames_list()|join(', ')}}
+  </div>
+</div>
+<br>
+{% endfor %}

@@ -19,6 +19,9 @@ class Book(Base):
     def __repr__(self):
         return "id: {}, title: {}".format(self.id, self.title)
 
+    def get_authornames_list(self):
+        return map(lambda a: a.name, self.authors)
+
 
 class Author(Base):
     __tablename__ = 'author'
@@ -31,3 +34,6 @@ class Author(Base):
 
     def __repr__(self):
         return "id: {}, title: {}".format(self.id, self.name)
+
+    def get_booktitles_list(self):
+        return map(lambda b: "\"{}\"".format(b.title), self.books)

@@ -1,25 +1,13 @@
 {% extends "_base.html" %}
 
 {% block content %}
-
-  {% for book in books %}
-  <div>"{{book.title}}": 
-    {% for author in book.authors %}
-      {{author.name}}
-    {% endfor %}
+  <h3>Книги в библиотеке</h3>
+  <div>
+    {% include "__books.html" %}
   </div>
 
-  {% endfor %}
-
-  <br>
-
-  {% for author in authors %}
-    <div>
-    {{author.name}}
-    {% for book in author.books %}
-      "{{book.title}}"
-    {% endfor %}
-    </div>
-  {% endfor %}
-
+  <h3>Авторы в библиотеке</h3>
+  <div>
+    {% include "__authors.html" %}
+  </div>
 {% endblock %}

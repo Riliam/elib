@@ -5,6 +5,20 @@
   <title></title>
 </head>
 <body>
-  {% block content %}{% endblock %} 
+
+  <div>
+    <div>
+      {% block header %}{% endblock %}
+    </div>
+
+    <div>
+      {% block search %}{% endblock %}
+    </div>
+
+    <div>
+      {% block content %}{% endblock %} 
+    </div>
+  </div>
+
 </body>
 </html>
