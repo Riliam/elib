@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link href="{{ url_for('static', filename='dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='dist/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+  <script src="{{ url_for('static', filename='jquery-2.1.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='dist/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
+  <div class="container">
+    {% include "__header.html" %}
 
-  <div>
-    <div>
-      {% block header %}{% endblock %}
-    </div>
+    {% include "__nav.html" %}
 
-    <div>
-      {% block search %}{% endblock %}
-    </div>
+    <br>
 
-    <div>
-      {% block content %}{% endblock %} 
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        {% block content %}{% endblock %} 
+      </div>
     </div>
   </div>
 

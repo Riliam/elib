@@ -1,13 +1,25 @@
 {% extends "_base.html" %}
 
+{% block nav %}
+
+{% endblock nav %}
 {% block content %}
-  <h3>Книги в библиотеке</h3>
-  <div>
-    {% include "__books.html" %}
+  <div class="col-md-6" id="id-list-books-entries">
+    <h2 class="inline-header">Книги в библиотеке</h2>
+    <small><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></small>
+    <br><br>
+    <div id="id-enumerate-books">
+      {% include "__books.html" %}
+    </div>
+    <br>
   </div>
 
-  <h3>Авторы в библиотеке</h3>
-  <div>
-    {% include "__authors.html" %}
+  <div class="col-md-6" id="id-list-authors-entries">
+    <h2 class="inline-header">Авторы в библиотеке</h2>
+    <small><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></small>
+    <br><br>
+    <div id="id-enumerate-authors">
+      {% include "__authors.html" %}
+    </div>
   </div>
-{% endblock %}
+{% endblock content %}

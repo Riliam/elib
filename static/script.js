@@ -1,4 +1,25 @@
 $(document).ready(function() {
+
+  $("#id-search").on("keyup", function() {
+    var search_query = $(this).val();
+    $.ajax({
+      type: "GET",
+      url: "/_search",
+      data: {search_query: search_query},
+      success: function(response){
+        $("#id-enumerate-books").html(response.books_markup);
+        $("#id-enumerate-authors").html(response.authors_markup); 
+      },
+      error: function(response){
+        alert("Search error");
+      }      
+    });
+  });
+
+
+
+
+
   $("#id-toggle-books-entries").on("click", function() {  
 
     $("#id-list-books-entries").removeClass("hidden col-md-offset-3").addClass("col-md-offset-3");

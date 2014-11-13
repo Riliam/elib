@@ -36,4 +36,4 @@ class Author(Base):
         return "id: {}, title: {}".format(self.id, self.name)
 
     def get_booktitles_list(self):
-        return map(lambda b: "\"{}\"".format(b.title), self.books)
+        return map(lambda b: "{}".format(b.title), self.books)
