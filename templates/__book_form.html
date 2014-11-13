@@ -1,0 +1,20 @@
+{% extends "_modal_base.html" %}
+
+{% block modal_target %}id-modal-book{% endblock %}
+
+
+{% block modal_title %}
+<div id="id-title-book-form">
+  Добавить книгу
+</div>
+{% endblock %}
+
+{% block modal_content %}
+<form role="form" id="id-book-form">
+  {{ book_form.csrf_token }}
+  <div class="form-group">
+    {{ book_form.booktitle(class="form-control", id="id-input-book-name", placeholder="Введите название книги") }}
+  </div>
+  <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+{% endblock modal_content %}

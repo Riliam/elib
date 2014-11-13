@@ -1,0 +1,22 @@
+{% extends "_modal_base.html" %}
+
+{% block modal_target %}id-modal-author{% endblock %}
+
+
+{% block modal_title %}
+<div id="id-title-author-form">
+  Добавить автора
+</div>
+{% endblock %}
+
+
+{% block modal_content %}
+<form role="form" id="id-author-form">
+  {{ author_form.csrf_token }}
+  <div class="form-group">
+    {{ author_form.name(class="form-control", id="id-input-author-name", placeholder="Введите имя автора") }}
+  </div>
+  <button type="submit" class="btn btn-primary">Сохранить</button>
+
+</form>
+{% endblock modal_content %}

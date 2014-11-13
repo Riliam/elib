@@ -16,7 +16,41 @@ $(document).ready(function() {
     });
   });
 
+  $("#id-book-form").on("submit", function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/_add_book",
+      data: $("#id-book-form").serialize(),
+      success: function(response) {
+        $("#id-input-book-name").val("");
+        $("#id-enumerate-books").html(response.books_markup);
+        $("#id-enumerate-authors").html(response.authors_markup); 
+        
+      },
+      error: function(response) {
+        alert("Ошибка во время сохранения книги");
+      }
+    });
+  });
 
+  $("#id-author-form").on("submit", function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/_add_author",
+      data: $("#id-author-form").serialize(),
+      success: function(response) {
+        $("#id-input-author-name").val("");
+        $("#id-enumerate-books").html(response.books_markup);
+        $("#id-enumerate-authors").html(response.authors_markup); 
+        
+      },
+      error: function(response) {
+        alert("Ошибка во время сохранения книги");
+      }
+    });
+  });
 
 
 
