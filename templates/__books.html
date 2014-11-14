@@ -8,9 +8,10 @@
   <hr>
 {% endfor %}
 
+
 <script>
   $(document).ready(function(){
-    $("#id-enumerate-books a.delete-book").on("click", function() {
+    $(".delete-book").on("click", function() {
       var bookid = $(this).attr("data-bookid");
       $.ajax({
         type: "POST",
@@ -36,5 +37,7 @@
   $("#id-add-book").on("click", function() {
     $("#id-input-book-name").val("");
     $("#id-title-book-form").html("Добавить книгу");
+    $("#id-input-book-authors").multiselect("deselectAll", false);
+    $("#id-input-book-authors").multiselect("updateButtonText");
   })
 </script>

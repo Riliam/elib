@@ -34,6 +34,18 @@ $(document).ready(function() {
     });
   });
 
+  $("#id-add-author-from-book-form").on("click", function() {
+    $("#id-modal-book").modal("hide");
+    $("#id-modal-author").modal("show");
+  });
+
+  $("#id-input-book-authors").multiselect({enableFiltering: true});
+
+  $("#id-modal-book").on("shown.bs.modal", function() {
+    alert($("#id-modal-book .modal-body").html());
+  });
+
+
   $("#id-author-form").on("submit", function(e) {
     e.preventDefault();
     $.ajax({
@@ -44,10 +56,9 @@ $(document).ready(function() {
         $("#id-input-author-name").val("");
         $("#id-enumerate-books").html(response.books_markup);
         $("#id-enumerate-authors").html(response.authors_markup); 
-        
       },
       error: function(response) {
-        alert("Ошибка во время сохранения книги");
+        alert("Ошибка во время сохранения автора");
       }
     });
   });
@@ -55,7 +66,6 @@ $(document).ready(function() {
 
 
   $("#id-toggle-books-entries").on("click", function() {  
-
     $("#id-list-books-entries").removeClass("hidden col-md-offset-3").addClass("col-md-offset-3");
     $("#id-list-authors-entries").removeClass("hidden col-md-offset-3").addClass("hidden");
 

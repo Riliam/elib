@@ -4,6 +4,7 @@ from models import Book, Author
 from forms import BookForm, AuthorForm
 
 DEBUG = True
+SECRET_KEY = "secret secret key"
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -16,10 +17,7 @@ def json_books_and_authors():
     books_markup = render_template("__books.html", books=books)
     authors_markup = render_template("__authors.html", authors=authors)
 
-    print(books_markup)
-
     return jsonify(books_markup=books_markup, authors_markup=authors_markup)
-
 
 
 @app.route("/")
@@ -28,11 +26,11 @@ def index():
     authors = Author.query.all()
 
     book_form = BookForm()
+    book_form.authors.choices = [(author.id, author.name) for author in authors]
     author_form = AuthorForm()
 
     return render_template("index.html", books=books, authors=authors,
                             book_form=book_form, author_form=author_form)
-
 
 @app.route("/_search")
 def search():
@@ -59,6 +57,7 @@ def add_author():
         db_session.commit()
     return json_books_and_authors()
 
+
 @app.route("/_delete_author", methods=["POST"])
 def delete_author():
     authorid  = request.form.get("authorid")
@@ -68,16 +67,24 @@ def delete_author():
     return json_books_and_authors()
 
 
-
 @app.route("/_add_book", methods=["POST"])
 def add_book():
     book_form = BookForm(request.form)
-    if book_form.validate():
+    if book_form.validate_on_submit:
         booktitle = book_form.booktitle.data
+        author_ids = book_form.authors.data
+
         book = Book(title=booktitle)
+
+        for author_id in author_ids:
+            author = Author.query.get(author_id)
+            book.authors.append(author)
+
         db_session.add(book)
         db_session.commit()
+
     return json_books_and_authors()
+
 
 @app.route("/_delete_book", methods=["POST"])
 def delete_book():

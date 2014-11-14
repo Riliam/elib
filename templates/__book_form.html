@@ -13,8 +13,15 @@
 <form role="form" id="id-book-form">
   {{ book_form.csrf_token }}
   <div class="form-group">
+    {{ book_form.booktitle.label(for="id-input-book-name") }}
     {{ book_form.booktitle(class="form-control", id="id-input-book-name", placeholder="Введите название книги") }}
   </div>
-  <button type="submit" class="btn btn-primary">Сохранить</button>
+  <div class="form-group">
+    {{ book_form.authors.label(for="id-input-book-authors") }}<br>
+    {{ book_form.authors(id="id-input-book-authors") }}
+    <br>
+    <a href="javascript:" id="id-add-author-from-book-form">Добавить автора</a>
+  </div>
+  {{ book_form.submit(class="btn btn-primary") }}
 </form>
 {% endblock modal_content %}
