@@ -12,13 +12,16 @@
 {% block modal_content %}
 <form role="form" id="id-book-form">
   {{ book_form.csrf_token }}
+  {{ book_form.id(id="id-input-book-id") }}
   <div class="form-group">
     {{ book_form.booktitle.label(for="id-input-book-name") }}
     {{ book_form.booktitle(class="form-control", id="id-input-book-name", placeholder="Введите название книги") }}
   </div>
   <div class="form-group">
     {{ book_form.authors.label(for="id-input-book-authors") }}<br>
-    {{ book_form.authors(id="id-input-book-authors") }}
+    <div "id_input-book-authors-wrapper">
+      {{ book_form.authors(id="id-input-book-authors") }}
+    </div>
     <br>
     <a href="javascript:" id="id-add-author-from-book-form">Добавить автора</a>
   </div>

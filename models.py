@@ -17,10 +17,13 @@ class Book(Base):
         self.title = title
 
     def __repr__(self):
-        return "id: {}, title: {}".format(self.id, self.title)
+        return "id: {}, title: {}".format(unicode(self.id), unicode(self.title))
 
     def get_authornames_list(self):
-        return map(lambda a: a.name, self.authors)
+        return map(lambda a: unicode(a.name), self.authors)
+
+    def get_authorids_str(self):
+        return ",".join(map(lambda a: unicode(a.id), self.authors))
 
 
 class Author(Base):
@@ -33,7 +36,7 @@ class Author(Base):
         self.name = name
 
     def __repr__(self):
-        return "id: {}, title: {}".format(self.id, self.name)
+        return "id: {}, title: {}".format(unicode(self.id), unicode(self.name))
 
     def get_booktitles_list(self):
-        return map(lambda b: "{}".format(b.title), self.books)
+        return map(lambda b: unicode(b.title), self.books)

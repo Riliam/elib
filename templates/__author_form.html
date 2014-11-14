@@ -16,7 +16,7 @@
   <div class="form-group">
     {{ author_form.name(class="form-control", id="id-input-author-name", placeholder="Введите имя автора") }}
   </div>
-  <button type="submit" class="btn btn-primary">Сохранить</button>
+  {{ author_form.submit(class="btn btn-primary") }}
 
 </form>
 {% endblock modal_content %}

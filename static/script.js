@@ -18,9 +18,16 @@ $(document).ready(function() {
 
   $("#id-book-form").on("submit", function(e) {
     e.preventDefault();
+    var url;
+    if ($(this).attr("data-action") === "add"){
+      url = "/_add_book";
+    }
+    else{
+      url = "/_edit_book";
+    }
     $.ajax({
       type: "POST",
-      url: "/_add_book",
+      url: url,
       data: $("#id-book-form").serialize(),
       success: function(response) {
         $("#id-input-book-name").val("");
@@ -32,6 +39,7 @@ $(document).ready(function() {
         alert("Ошибка во время сохранения книги");
       }
     });
+    $("#id-modal-book").modal("hide");
   });
 
   $("#id-add-author-from-book-form").on("click", function() {
@@ -40,10 +48,6 @@ $(document).ready(function() {
   });
 
   $("#id-input-book-authors").multiselect({enableFiltering: true});
-
-  $("#id-modal-book").on("shown.bs.modal", function() {
-    alert($("#id-modal-book .modal-body").html());
-  });
 
 
   $("#id-author-form").on("submit", function(e) {
@@ -56,11 +60,13 @@ $(document).ready(function() {
         $("#id-input-author-name").val("");
         $("#id-enumerate-books").html(response.books_markup);
         $("#id-enumerate-authors").html(response.authors_markup); 
+        location.reload();
       },
       error: function(response) {
         alert("Ошибка во время сохранения автора");
       }
     });
+    $("#id-modal-author").modal("hide");
   });
 
 

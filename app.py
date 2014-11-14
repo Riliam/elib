@@ -1,4 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+from __future__ import print_function
+
+import chardet
+
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import render_template_string
+
 from database import db_session
 from models import Book, Author
 from forms import BookForm, AuthorForm
@@ -35,8 +41,9 @@ def index():
 @app.route("/_search")
 def search():
     query = request.args.get("search_query")
+    print(type(query))
 
-    sql_query = "%{}%".format(query)
+    sql_query = u"%{}%".format(query)
 
     books = Book.query.filter(Book.title.like(sql_query))
     authors = Author.query.filter(Author.name.like(sql_query))
@@ -55,8 +62,8 @@ def add_author():
         author = Author(name=authorname)
         db_session.add(author)
         db_session.commit()
-    return json_books_and_authors()
 
+    return json_books_and_authors()
 
 @app.route("/_delete_author", methods=["POST"])
 def delete_author():
@@ -65,7 +72,6 @@ def delete_author():
     db_session.delete(author)
     db_session.commit()
     return json_books_and_authors()
-
 
 @app.route("/_add_book", methods=["POST"])
 def add_book():
@@ -84,6 +90,29 @@ def add_book():
         db_session.commit()
 
     return json_books_and_authors()
+
+
+@app.route("/_edit_book", methods=["POST"])
+def edit_book():
+    book_form = BookForm(request.form)
+    if book_form.validate_on_submit:
+        id = book_form.id.data
+        book = Book.query.get(id)
+        booktitle = book_form.booktitle.data
+        author_ids = book_form.authors.data
+
+        book.title = booktitle
+        book.authors[:] = []
+        for author_id in author_ids:
+            author = Author.query.get(author_id)
+            book.authors.append(author)
+
+        db_session.add(book)
+        db_session.commit()
+
+    return json_books_and_authors()
+
+
 
 
 @app.route("/_delete_book", methods=["POST"])
