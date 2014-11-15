@@ -112,6 +112,23 @@ def add_author():
     return json_books_and_authors()
 
 
+@app.route("/_edit_author", methods=["GET", "POST"])
+@login_required
+def edit_author():
+    author_form = AuthorForm(request.form)
+    if author_form.validate_on_submit:
+        id = author_form.id.data
+        author = Author.query.get(id)
+        authorname = author_form.name.data
+
+        author.name = authorname
+
+        db_session.add(author)
+        db_session.commit()
+
+    return json_books_and_authors()
+
+
 @app.route("/_delete_author", methods=["GET", "POST"])
 @login_required
 def delete_author():

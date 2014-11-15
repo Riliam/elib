@@ -5,6 +5,17 @@
         <span>E-Lib</span>
       </a>
     </div>
+    <div class="nav navbar-nav navbar-left bg-danger" style="min-width: 300px;">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="navbar-text list-unstyled" id="id-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    </div>
     <div style="float: right; margin-right: 15px;">
       {% if user %}
       <p class="navbar-text">{{user}} (<a href="/logout" class="navbar-link">Выйти</a>)</p> 

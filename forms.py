@@ -13,6 +13,7 @@ class BookForm(Form):
 
 
 class AuthorForm(Form):
+    id = HiddenField()
     name = StringField('Имя автора', validators=[DataRequired()])
     submit = SubmitField(u'Сохранить')
 

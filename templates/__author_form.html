@@ -13,6 +13,7 @@
 {% block modal_content %}
 <form role="form" id="id-author-form">
   {{ author_form.csrf_token }}
+  {{ author_form.id(id="id-input-author-id") }}
   <div class="form-group">
     {{ author_form.name(class="form-control", id="id-input-author-name", placeholder="Введите имя автора") }}
   </div>

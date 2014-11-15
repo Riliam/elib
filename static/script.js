@@ -52,19 +52,18 @@ $(document).ready(function() {
     $("#id-modal-book").modal("hide");
   });
 
-  $("#id-add-author-from-book-form").on("click", function() {
-    $("#id-modal-book").modal("hide");
-    $("#id-modal-author").modal("show");
-  });
-
-  $("#id-input-book-authors").multiselect({enableFiltering: true, nonSelectedText: "Выберите авторов"});
-
-
   $("#id-author-form").on("submit", function(e) {
     e.preventDefault();
+    var url;
+    if ($(this).attr("data-action") === "add"){
+      url = "/_add_author";
+    }
+    else{
+      url = "/_edit_author";
+    }
     $.ajax({
       type: "POST",
-      url: "/_add_author",
+      url: url,
       data: $("#id-author-form").serialize(),
       success: function(response) {
         $("#id-input-author-name").val("");
@@ -78,6 +77,15 @@ $(document).ready(function() {
     });
     $("#id-modal-author").modal("hide");
   });
+
+  $("#id-add-author-from-book-form").on("click", function() {
+    $("#id-modal-book").modal("hide");
+    $("#id-modal-author").modal("show");
+  });
+
+  $("#id-input-book-authors").multiselect({enableFiltering: true, nonSelectedText: "Выберите авторов"});
+
+
 
 
 
