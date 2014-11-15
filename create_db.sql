@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS BOOK;
+DROP TABLE IF EXISTS AUTHOR;
+DROP TABLE IF EXISTS AUTHOR_BOOK;
+DROP TABLE IF EXISTS USER;
+
+CREATE TABLE book (
+	id INTEGER NOT NULL, 
+	title VARCHAR(128), 
+	PRIMARY KEY (id), 
+	UNIQUE (title)
+);
+
+CREATE TABLE author (
+	id INTEGER NOT NULL, 
+	name VARCHAR(128), 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+);
+
+CREATE TABLE author_book (
+	book_id INTEGER, 
+	author_id INTEGER, 
+	FOREIGN KEY(book_id) REFERENCES book (id), 
+	FOREIGN KEY(author_id) REFERENCES author (id)
+);
+
+CREATE TABLE user (
+	id INTEGER NOT NULL, 
+	username VARCHAR(128), 
+	pwdhash VARCHAR(100), 
+	PRIMARY KEY (id), 
+	UNIQUE (username)
+);
