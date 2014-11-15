@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    $(".lib-header").on("mouseover", function() {
+      $(this).children(".to-hide").removeClass("hidden");
+    });
+
+    $(".lib-header").on("mouseleave", function() {
+      $(this).children(".to-hide").addClass("hidden");
+    });
+
+  $("#id-messages").show().delay(5000).fadeOut();
+
   $("#id-search").on("keyup", function() {
     var search_query = $(this).val();
     $.ajax({
@@ -47,7 +57,7 @@ $(document).ready(function() {
     $("#id-modal-author").modal("show");
   });
 
-  $("#id-input-book-authors").multiselect({enableFiltering: true});
+  $("#id-input-book-authors").multiselect({enableFiltering: true, nonSelectedText: "Выберите авторов"});
 
 
   $("#id-author-form").on("submit", function(e) {

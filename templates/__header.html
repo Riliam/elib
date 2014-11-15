@@ -5,5 +5,23 @@
         <span>E-Lib</span>
       </a>
     </div>
+    <div style="float: right; margin-right: 15px;">
+      {% if user %}
+      <p class="navbar-text">{{user}} (<a href="/logout" class="navbar-link">Выйти</a>)</p> 
+      {% else %}
+      <form id="id-user-form" class="navbar-form" action="/login" role="form" method="POST">
+        {{ user_form.csrf_token }}
+        <div class="form-group">
+          {{ user_form.username.label }}
+          {{ user_form.username(class="form-control input-sm", style="width: 100px") }}
+        </div>
+        <div class="form-group">
+          {{ user_form.password.label }} 
+          {{ user_form.password(class="form-control input-sm", style="width: 100px") }}
+        </div>
+        {{ user_form.submit(class="btn btn-primary btn-sm") }}
+      </form>
+      {% endif %}
+    </div>
   </div>
 </nav>

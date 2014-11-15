@@ -5,12 +5,16 @@
 {% endblock nav %}
 {% block content %}
   <div class="col-md-6" id="id-list-books-entries">
-    <h2 class="inline-header">Книги в библиотеке</h2>
-    <small>
-      <a href="javascript:" id="id-add-book" data-toggle="modal" data-target="#id-modal-book">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </a>
-    </small>
+    <span class="lib-header">
+      <h2 class="inline-header">Книги в библиотеке</h2>
+      {% if user %}
+      <h4 class="inline-header to-hide hidden">
+        <a href="javascript:" id="id-add-book" data-toggle="modal" data-target="#id-modal-book">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+      </h4>
+      {% endif %}
+    </span>
     <br><br>
     <div id="id-enumerate-books">
       {% include "__books.html" %}
@@ -19,12 +23,16 @@
   </div>
 
   <div class="col-md-6" id="id-list-authors-entries">
-    <h2 class="inline-header">Авторы в библиотеке</h2>
-    <small>
-      <a href="javascript:" id="id-add-author" data-toggle="modal" data-target="#id-modal-author">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </a>
-    </small>
+    <span class="lib-header">
+      <h2 class="inline-header">Авторы в библиотеке</h2>
+      {% if user %}
+      <h4 class="inline-header to-hide hidden">
+        <a href="javascript:" id="id-add-author" data-toggle="modal" data-target="#id-modal-author">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+      </h4>
+      {% endif %}
+    </span>
     <br><br>
     <div id="id-enumerate-authors">
       {% include "__authors.html" %}

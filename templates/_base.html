@@ -15,6 +15,16 @@
 </head>
 <body>
   <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="alert alert-warning list-unstyled" id="id-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
     {% include "__header.html" %}
 
     {% include "__nav.html" %}

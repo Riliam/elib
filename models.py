@@ -1,3 +1,5 @@
+from werkzeug import generate_password_hash, check_password_hash
+
 from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -40,3 +42,23 @@ class Author(Base):
 
     def get_booktitles_list(self):
         return map(lambda b: unicode(b.title), self.books)
+
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    username = Column(String(128), unique=True)
+    pwdhash = Column(String(100))
+
+    def __init__(self, username, password):
+        self.username = username
+        self.set_password(password)
+
+    def __repr__(self):
+        return self.username
+
+    def set_password(self, password):
+        self.pwdhash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.pwdhash, password)
