@@ -12,6 +12,7 @@ gunicorn==19.1.1
 ipython==2.3.0
 itsdangerous==0.24
 passlib==1.6.2
+psycopg2==2.5.4
 py-bcrypt==0.4
 pycrypto==2.6.1
 wsgiref==0.1.2
