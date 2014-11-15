@@ -43,6 +43,7 @@
     });
   });
 
+
   $(".edit-author").on("click", function() {
     $("#id-author-form").attr("data-action", "edit")
     $("#id-input-author-id").val($(this).attr("data-authorid"));
@@ -50,10 +51,12 @@
     var authorname = $(this).attr("data-authorname");
     $("#id-input-author-name").val(authorname);
     $("#id-title-author-form").html("Редактировать автора \"" + authorname + "\"");
-
   });
 
+
   $("#id-add-author").on("click", function() {
+    $("#id-author-form").attr("data-action", "add");
+    $("#id-input-author-id").val("");
     $("#id-input-author-name").val("");
     $("#id-title-author-form").html("Добавить автора");
   });

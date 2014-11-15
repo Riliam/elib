@@ -7,15 +7,15 @@ Book.query.delete()
 Author.query.delete()
 
 
-cookbook_book = Book(title="Python Cookbook");
-learning_book = Book(title="Learning Python");
-pocket_book = Book(title="Python Pocket Reference");
-enlightment_book = Book(title="Code Complete");
+cookbook_book = Book(title="Python Cookbook")
+learning_book = Book(title="Learning Python")
+pocket_book = Book(title="Python Pocket Reference")
+enlightment_book = Book(title="Code Complete")
 
-bkj_author = Author(name="Brian K. Jones");
-db_author = Author(name="David Beazley");
-ml_author = Author(name="Mark Lutz");
-sm_author = Author(name="Steve McConnell");
+bkj_author = Author(name="Brian K. Jones")
+db_author = Author(name="David Beazley")
+ml_author = Author(name="Mark Lutz")
+sm_author = Author(name="Steve McConnell")
 
 cookbook_book.authors.append(bkj_author)
 cookbook_book.authors.append(db_author)

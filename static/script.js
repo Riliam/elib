@@ -52,6 +52,7 @@ $(document).ready(function() {
     $("#id-modal-book").modal("hide");
   });
 
+
   $("#id-author-form").on("submit", function(e) {
     e.preventDefault();
     var url;

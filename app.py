@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import os
 from functools import wraps
 
 from flask import Flask, render_template, request, jsonify
@@ -10,7 +11,9 @@ from database import db_session
 from models import Book, Author, User
 from forms import BookForm, AuthorForm, UserForm
 
-DEBUG = True
+
+if not os.environ.get("HEROKU"):
+    DEBUG = True
 SECRET_KEY = "secret secret key"
 
 app = Flask(__name__)
@@ -91,8 +94,8 @@ def search():
 
     sql_query = u"%{}%".format(query)
 
-    books = Book.query.filter(Book.title.like(sql_query))
-    authors = Author.query.filter(Author.name.like(sql_query))
+    books = Book.query.filter(Book.title.ilike(sql_query))
+    authors = Author.query.filter(Author.name.ilike(sql_query))
 
     books_markup = render_template("__books.html", books=books)
     authors_markup = render_template("__authors.html", authors=authors)
