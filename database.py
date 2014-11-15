@@ -5,7 +5,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-uri = os.environ.get("DATABASE_URI") or 'sqlite:///db.sqlite3'
+uri = os.environ.get("DATABASE_URL") or 'sqlite:///db.sqlite3'
 
 engine = create_engine(uri, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
