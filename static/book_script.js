@@ -33,11 +33,15 @@ $(document).ready(function() {
   $("#id-add-author-from-book-form").on("click", function() {
     $("#id-modal-book").modal("hide");
     $("#id-modal-author").modal("show");
+
     $("#id-add-several-wrapper").show();
     $("#id-add-several-authors").prop("checked", false);
+
     $("#id-author-form").attr("data-action", "add_to_book");
     $("#id-input-author-book-id").val($("#id-input-book-id").val());
     $("#id-author-form").attr("data-booktitle", $("#id-input-book-name").val());
+
+    $("#id-book-form").trigger("submit");
 
     if ($("#id-author-form").attr("data-action") === "add_to_book") {
       var booktitle;
