@@ -41,7 +41,7 @@ $(document).ready(function() {
       data: $("#id-book-form").serialize(),
       success: function(response) {
         if (response.message.length > 0){
-          $("#id-book-form-messages").show().html(response.message).delay(5000).fadeOut();
+          $("#id-book-form-messages").fadeIn().html(response.message).delay(5000).fadeOut();
         }
         else{
           $("#id-input-book-name").val("");
@@ -73,7 +73,7 @@ $(document).ready(function() {
       data: $("#id-author-form").serialize(),
       success: function(response) {
         if (response.message.length > 0){
-          $("#id-author-form-messages").show().html(response.message).delay(5000).fadeOut();
+          $("#id-author-form-messages").fadeIn().html(response.message).delay(5000).fadeOut();
         }
         else{
           $("#id-input-author-name").val("");

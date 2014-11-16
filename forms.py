@@ -26,5 +26,5 @@ class UserForm(Form):
     username = StringField(u'Логин',
                            validators=[Required(), Length(min=4, max=128)])
     password = PasswordField(u'Пароль',
-                             validators=[Required(), Length(min=6, max=128)])
+                             validators=[Required(), Length(min=4, max=128)])
     submit = SubmitField(u'Войти')
