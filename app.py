@@ -99,8 +99,10 @@ def search():
     books = Book.query.filter(Book.title.ilike(sql_query))
     authors = Author.query.filter(Author.name.ilike(sql_query))
 
-    books_markup = render_template("__books.html", books=books)
-    authors_markup = render_template("__authors.html", authors=authors)
+    user = session.get("username")
+
+    books_markup = render_template("__books.html", books=books, user=user)
+    authors_markup = render_template("__authors.html", authors=authors, user=user)
 
     return jsonify(books_markup=books_markup, authors_markup=authors_markup)
 

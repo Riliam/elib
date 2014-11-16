@@ -18,8 +18,8 @@ $(document).ready(function() {
         }
         else{
           $("#id-input-author-name").val("");
-          $("#id-enumerate-books").html(response.books_markup);
-          $("#id-enumerate-authors").html(response.authors_markup); 
+          // $("#id-enumerate-books").html(response.books_markup);
+          // $("#id-enumerate-authors").html(response.authors_markup); 
           if ( ! $("#id-add-several-authors").prop("checked")) {
             location.reload();
           }
@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
   });
 
-  $("#id-enumerate-authors, .book-authors").on("click", ".edit-author", function() {
+  $("#id-enumerate-authors, #id-enumerate-books").on("click", ".edit-author", function() {
     $("#id-add-several-wrapper").hide();
     $("#id-add-several-authors").prop("checked", false);
 

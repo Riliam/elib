@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   $("#id-book-form").on("submit", function(e) {
     e.preventDefault();
     var url;
@@ -21,9 +22,7 @@ $(document).ready(function() {
           $("#id-enumerate-books").html(response.books_markup);
           $("#id-enumerate-authors").html(response.authors_markup); 
           $("#id-modal-book").modal("hide");
-          location.reload()
         }
-        
       },
       error: function(response) {
         alert("Ошибка во время сохранения книги");
@@ -67,7 +66,8 @@ $(document).ready(function() {
       });
     });
 
-  $("#id-enumerate-books, .author-books").on("click", ".edit-book", function() {
+  $("#id-enumerate-books, #id-enumerate-authors").on("click", ".edit-book", function() {
+
     $("#id-book-form-messages").hide();
 
     $("#id-book-form").attr("data-action", "edit")
