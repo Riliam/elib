@@ -1,7 +1,5 @@
 elib
 ====
-### Для работы необходимы:
-`virtualenv`, `sqlite3`
 ### Команды для локального развертывания
 
     git clone https://github.com/Riliam/elib.git
@@ -9,8 +7,17 @@ elib
     virtualenv venv
     . venv/bin/activate
     pip install -r requirements.txt
+
+Создание базы данных
+
     sqlite3 db.sqlite3 < create_db.sql
     sqlite3 db.sqlite3 < populate_db.sql
+Или
+
+    python create_schema_and_populate_db.py
+
+Запуск сервера
+
     python app.py
 
 ### Развернутое приложение на heroku.com
