@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import time
 import os
 from functools import wraps
 
@@ -123,6 +124,11 @@ def add_author():
         booktitle = author_form.book_title.data
         if booktitle:
             book = Book.query.filter_by(title=booktitle).first()
+            i = 0
+            while not book and i < 10:
+                time.sleep(1)
+                book = Book.query.filter_by(title=booktitle).first()
+                i += 1
             author.books.append(book)
 
         db_session.add(author)
