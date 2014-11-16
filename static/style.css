@@ -11,13 +11,6 @@
   text-decoration: underline;
 }
 
-.grey-text:hover {
-  color: #333;
-  text-decoration: underline;
-  cursor: default;
-}
-
-
 .padded-list-item {
   padding-left: 2em;
 }
