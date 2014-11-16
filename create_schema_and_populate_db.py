@@ -1,11 +1,11 @@
-from models import Book, Author
+from models import Book, Author, author_book
 from database import init_db, db_session
 
 init_db()
 
+db_session.execute(author_book.delete())
 Book.query.delete()
 Author.query.delete()
-
 
 cookbook_book = Book(title="Python Cookbook")
 learning_book = Book(title="Learning Python")
@@ -27,6 +27,7 @@ db_session.add(cookbook_book)
 db_session.add(learning_book)
 db_session.add(pocket_book)
 db_session.add(enlightment_book)
+
 db_session.add(bkj_author)
 db_session.add(db_author)
 db_session.add(ml_author)
