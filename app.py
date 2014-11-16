@@ -21,8 +21,8 @@ app.config.from_object(__name__)
 
 
 def json_books_and_authors(message=""):
-    books = Book.query.all()
-    authors = Author.query.all()
+    books = Book.query.order_by(Book.id)
+    authors = Author.query.order_by(Author.id)
 
     user = session.get("username")
 
@@ -53,8 +53,8 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    books = Book.query.all()
-    authors = Author.query.all()
+    books = Book.query.order_by(Book.id)
+    authors = Author.query.order_by(Author.id)
 
     book_form = BookForm()
     book_form.authors.choices = [(author.id, author.name) for author in authors]
@@ -101,8 +101,8 @@ def search():
 
     sql_query = u"%{}%".format(query)
 
-    books = Book.query.filter(Book.title.ilike(sql_query))
-    authors = Author.query.filter(Author.name.ilike(sql_query))
+    books = Book.query.filter(Book.title.ilike(sql_query)).order_by(Book.id)
+    authors = Author.query.filter(Author.name.ilike(sql_query)).order_by(Book.id)
 
     user = session.get("username")
 
