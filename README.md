@@ -22,3 +22,6 @@ elib
 
 ### Развернутое приложение на heroku.com
 http://floating-beach-6335.herokuapp.com/
+
+### Пароль и логин
+admin/admin
