@@ -1,3 +1,16 @@
 .inline-header {
   display: inline-block;
 }
+
+.black-link {
+  color: #999;
+}
+
+.black-link:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.padded-list-item {
+  padding-left: 2em;
+}

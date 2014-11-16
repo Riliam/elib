@@ -16,7 +16,7 @@ class BookForm(Form):
 
 class AuthorForm(Form):
     id = HiddenField()
-    name = StringField('Имя автора',
+    name = StringField(u'Имя автора',
                        validators=[Required(message=u"Имя автора - обязательное поле"),
                                    Length(min=4, max=128, message=u"Имя автора должно быть от 4 до 128 символов")])
     submit = SubmitField(u'Сохранить')

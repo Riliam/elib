@@ -11,12 +11,17 @@
 
 
 {% block modal_content %}
+<div class="pull-right" id="id-add-several-wrapper">
+  <input type="checkbox" id="id-add-several-authors">
+  <label for="id-add-several-authors">Добавить несколько</label>
+</div>
 <div class="alert alert-warning" id="id-author-form-messages">
 </div>
 <form role="form" id="id-author-form">
   {{ author_form.csrf_token }}
   {{ author_form.id(id="id-input-author-id") }}
   <div class="form-group">
+    {{ author_form.name.label }}
     {{ author_form.name(class="form-control", id="id-input-author-name", placeholder="Введите имя автора") }}
   </div>
   {{ author_form.submit(class="btn btn-primary") }}

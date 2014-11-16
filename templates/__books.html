@@ -1,83 +1,40 @@
 {% for book in books %}
-<div class="book-entry">
+<div class="book-entry" data-booktitle="{{book.title}}" data-bookid="{{book.id}}" data-bookauthors="{{book.get_authorids_str()}}">
   <h4 class="inline-header"> {{book.title}} </h4>
-  {% if user %}
-  <span class="to-hide hidden">
-    <small><a href="javascript:" class="edit-book" data-toggle="modal" data-target="#id-modal-book" data-booktitle="{{book.title}}" data-bookid="{{book.id}}" data-bookauthors="{{book.get_authorids_str()}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></small> 
-    <small><a href="javascript:" class="delete-book" data-bookid="{{book.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></small>
+  <span class="book-authors">
+    |
+    {% for author in book.authors %}
+      <span class="author-entry" data-authorname="{{author.name}}" data-authorid="{{author.id}}">
+        {% if user %}
+        <a href="#" class="black-link edit-author" data-toggle="modal" data-target="#id-modal-author">
+          {{ author.name}}
+        </a>
+        {% else %}
+          {{ author.name}}
+        {% endif %}
+      </span> | 
+    {% endfor %}
   </span>
+  {% if user %}
+  <div>
+    <small>
+      <a href="javascript:" class="edit-book" data-toggle="modal" data-target="#id-modal-book">
+        Редактировать
+      </a>
+    </small> |
+    <small>
+      <a href="javascript:" class="delete-book">
+        Удалить
+      </a>
+    </small>
+  </div>
   {% endif %}
-  <p>
-  Авторы: {{book.get_authornames_list()|join(', ')}}
-  </p>
   <hr>
+
+  <!--
+    <p>
+    Авторы: {{book.get_authornames_list()|join(', ')}}
+    </p>
+  -->
 </div>
 {% endfor %}
-
-
-<script>
-  $(document).ready(function(){
-
-    $(".book-entry").on("mouseover", function() {
-      $(this).children(".to-hide").removeClass("hidden");
-    });
-
-    $(".book-entry").on("mouseleave", function() {
-      $(this).children(".to-hide").addClass("hidden");
-    });
-
-    $(".delete-book").on("click", function() {
-      var bookid = $(this).attr("data-bookid");
-      $.ajax({
-        type: "POST",
-        url: "/_delete_book",
-        data: {bookid: bookid},
-        success: function(response){ 
-          $("#id-enumerate-books").html(response.books_markup);
-          $("#id-enumerate-authors").html(response.authors_markup); 
-        },
-        error: function(response){
-          alert("Error");
-        }
-        });
-      });
-
-    $(".edit-book").on("click", function() {
-      $("#id-book-form-messages").hide();
-      $("#id-book-form").attr("data-action", "edit")
-      $("#id-input-book-id").val($(this).attr("data-bookid"));
-
-      var booktitle = $(this).attr("data-booktitle");
-      $("#id-input-book-name").val(booktitle);
-      $("#id-title-book-form").html("Редактировать книгу \"" + booktitle + "\"");
-
-      $("#id-input-book-authors").multiselect("deselectAll", false);
-      $("#id-input-book-authors").multiselect("updateButtonText");
-
-      var author_ids = $(this).attr("data-bookauthors").split(",");
-
-      $("#id-input-book-authors option").each(function() {
-        var current_id = $(this).attr("value");
-        if (author_ids.indexOf(current_id) > -1) {
-          $(this).prop("selected", true);
-        }
-      });
-
-      $("#id-input-book-authors").multiselect("refresh");
-
-    });
-
-    $("#id-add-book").on("click", function() {
-      $("#id-book-form-messages").hide();
-      $("#id-book-form").attr("data-action", "add")
-      $("#id-input-book-id").val("");
-
-      $("#id-input-book-name").val("");
-      $("#id-title-book-form").html("Добавить книгу");
-
-      $("#id-input-book-authors").multiselect("deselectAll", false);
-      $("#id-input-book-authors").multiselect("updateButtonText");
-    });
-  });
-
-</script>
