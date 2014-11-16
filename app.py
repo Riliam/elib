@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 
-def json_books_and_authors():
+def json_books_and_authors(message=""):
     books = Book.query.all()
     authors = Author.query.all()
 
@@ -29,7 +29,9 @@ def json_books_and_authors():
     books_markup = render_template("__books.html", books=books, user=user)
     authors_markup = render_template("__authors.html", authors=authors, user=user)
 
-    return jsonify(books_markup=books_markup, authors_markup=authors_markup)
+    return jsonify(books_markup=books_markup,
+                   authors_markup=authors_markup,
+                   message=message)
 
 
 def login_required(f):
@@ -107,19 +109,22 @@ def search():
 @login_required
 def add_author():
     author_form = AuthorForm(request.form)
-    if author_form.validate():
+    errors = ""
+    if author_form.validate_on_submit():
         author = Author(name=author_form.name.data)
         db_session.add(author)
         db_session.commit()
+    else:
+        errors = "<br>".join(reduce(lambda a,b: a+b, author_form.errors.values()))
 
-    return json_books_and_authors()
-
+    return json_books_and_authors(errors)
 
 @app.route("/_edit_author", methods=["GET", "POST"])
 @login_required
 def edit_author():
     author_form = AuthorForm(request.form)
-    if author_form.validate_on_submit:
+    errors = ""
+    if author_form.validate_on_submit():
         id = author_form.id.data
         author = Author.query.get(id)
         authorname = author_form.name.data
@@ -128,9 +133,10 @@ def edit_author():
 
         db_session.add(author)
         db_session.commit()
+    else:
+        errors = "<br>".join(reduce(lambda a,b: a+b, author_form.errors.values()))
 
-    return json_books_and_authors()
-
+    return json_books_and_authors(errors)
 
 @app.route("/_delete_author", methods=["GET", "POST"])
 @login_required
@@ -145,8 +151,10 @@ def delete_author():
 @app.route("/_add_book", methods=["GET", "POST"])
 @login_required
 def add_book():
-    book_form = BookForm(request.form)
-    if book_form.validate_on_submit:
+    book_form = BookForm()
+    book_form.authors.choices = [(a.id, a.name) for a in Author.query.all()]
+    errors = ""
+    if book_form.validate_on_submit():
         booktitle = book_form.booktitle.data
         author_ids = book_form.authors.data
 
@@ -158,15 +166,19 @@ def add_book():
 
         db_session.add(book)
         db_session.commit()
+    else:
+        errors = "<br>".join(reduce(lambda a,b: a+b, book_form.errors.values()))
 
-    return json_books_and_authors()
+    return json_books_and_authors(errors)
 
 
 @app.route("/_edit_book", methods=["GET", "POST"])
 @login_required
 def edit_book():
-    book_form = BookForm(request.form)
-    if book_form.validate_on_submit:
+    book_form = BookForm()
+    book_form.authors.choices = [(a.id, a.name) for a in Author.query.all()]
+    errors = ""
+    if book_form.validate_on_submit():
         id = book_form.id.data
         book = Book.query.get(id)
         booktitle = book_form.booktitle.data
@@ -180,8 +192,10 @@ def edit_book():
 
         db_session.add(book)
         db_session.commit()
+    else:
+        errors = "<br>".join(reduce(lambda a,b: a+b, book_form.errors.values()))
 
-    return json_books_and_authors()
+    return json_books_and_authors(errors)
 
 
 @app.route("/_delete_book", methods=["GET", "POST"])

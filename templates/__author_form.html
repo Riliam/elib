@@ -11,6 +11,8 @@
 
 
 {% block modal_content %}
+<div class="alert alert-warning" id="id-author-form-messages">
+</div>
 <form role="form" id="id-author-form">
   {{ author_form.csrf_token }}
   {{ author_form.id(id="id-input-author-id") }}

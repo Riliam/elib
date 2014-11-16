@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block modal_content %}
+<div class="alert alert-warning" id="id-book-form-messages">
+</div>
 <form role="form" id="id-book-form">
   {{ book_form.csrf_token }}
   {{ book_form.id(id="id-input-book-id") }}

@@ -43,6 +43,7 @@
       });
 
     $(".edit-book").on("click", function() {
+      $("#id-book-form-messages").hide();
       $("#id-book-form").attr("data-action", "edit")
       $("#id-input-book-id").val($(this).attr("data-bookid"));
 
@@ -67,6 +68,7 @@
     });
 
     $("#id-add-book").on("click", function() {
+      $("#id-book-form-messages").hide();
       $("#id-book-form").attr("data-action", "add")
       $("#id-input-book-id").val("");
 

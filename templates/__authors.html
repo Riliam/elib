@@ -45,6 +45,7 @@
 
 
   $(".edit-author").on("click", function() {
+    $("#id-author-form-messages").hide();
     $("#id-author-form").attr("data-action", "edit")
     $("#id-input-author-id").val($(this).attr("data-authorid"));
 
@@ -55,6 +56,7 @@
 
 
   $("#id-add-author").on("click", function() {
+    $("#id-author-form-messages").hide();
     $("#id-author-form").attr("data-action", "add");
     $("#id-input-author-id").val("");
     $("#id-input-author-name").val("");
