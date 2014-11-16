@@ -29,8 +29,13 @@ def json_books_and_authors(message=""):
     books_markup = render_template("__books.html", books=books, user=user)
     authors_markup = render_template("__authors.html", authors=authors, user=user)
 
+    book_form = BookForm()
+    book_form.authors.choices = [(a.id, a.name) for a in authors]
+    book_authors_choices_markup = book_form.authors(id="id-input-book-authors")
+
     return jsonify(books_markup=books_markup,
                    authors_markup=authors_markup,
+                   book_authors_choices_markup=book_authors_choices_markup,
                    message=message)
 
 
@@ -114,6 +119,12 @@ def add_author():
     errors = ""
     if author_form.validate_on_submit():
         author = Author(name=author_form.name.data)
+
+        bookid = author_form.book_id.data
+        if bookid:
+            book = Book.query.get(bookid)
+            author.books.append(book)
+
         db_session.add(author)
         db_session.commit()
     else:

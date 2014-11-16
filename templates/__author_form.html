@@ -5,7 +5,7 @@
 
 {% block modal_title %}
 <div id="id-title-author-form">
-  Добавить автора
+  Добавить автора <span id="id-title-author-form-add-to-book"></span>
 </div>
 {% endblock %}
 
@@ -20,6 +20,7 @@
 <form role="form" id="id-author-form">
   {{ author_form.csrf_token }}
   {{ author_form.id(id="id-input-author-id") }}
+  {{ author_form.book_id(id="id-input-author-book-id") }}
   <div class="form-group">
     {{ author_form.name.label }}
     {{ author_form.name(class="form-control", id="id-input-author-name", placeholder="Введите имя автора") }}

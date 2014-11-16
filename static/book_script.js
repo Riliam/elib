@@ -30,6 +30,25 @@ $(document).ready(function() {
     });
   });
 
+  $("#id-add-author-from-book-form").on("click", function() {
+    $("#id-modal-book").modal("hide");
+    $("#id-modal-author").modal("show");
+    $("#id-add-several-wrapper").show();
+    $("#id-add-several-authors").prop("checked", false);
+    $("#id-author-form").attr("data-action", "add_to_book");
+    $("#id-input-author-book-id").val($("#id-input-book-id").val());
+    $("#id-author-form").attr("data-booktitle", $("#id-input-book-name").val());
+
+    if ($("#id-author-form").attr("data-action") === "add_to_book") {
+      var booktitle;
+      booktitle = $("#id-author-form").attr("data-booktitle");
+      if (booktitle != undefined && booktitle.length > 0) {
+        $("#id-title-author-form").html("Добавить автора для книги \"" + booktitle + "\"");
+      }
+      $("#id-input-author-name").val("");
+    }
+  });
+
   $("#id-add-book").on("click", function() {
     $("#id-book-form-messages").hide();
     $("#id-book-form").attr("data-action", "add")

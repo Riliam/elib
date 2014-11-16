@@ -26,16 +26,12 @@ $(document).ready(function() {
     });
   });
 
-
   $("#id-modal-author").on("hidden.bs.modal", function() {
-    location.reload();
-  })
-
-
-  $("#id-add-author-from-book-form").on("click", function() {
-    $("#id-modal-book").modal("hide");
-    $("#id-modal-author").modal("show");
+    $("#id-author-form").removeAttr("data-action");
+    $("#id-input-author-book-id").val("");
+    $("#id-author-form").removeAttr("data-booktitle");
   });
+
 
   $("#id-input-book-authors").multiselect({enableFiltering: true, nonSelectedText: "Выберите авторов"});
 });
