@@ -102,7 +102,7 @@ def search():
     sql_query = u"%{}%".format(query)
 
     books = Book.query.filter(Book.title.ilike(sql_query)).order_by(Book.id)
-    authors = Author.query.filter(Author.name.ilike(sql_query)).order_by(Book.id)
+    authors = Author.query.filter(Author.name.ilike(sql_query)).order_by(Author.id)
 
     user = session.get("username")
 
