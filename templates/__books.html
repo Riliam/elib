@@ -6,11 +6,13 @@
     {% for author in book.authors %}
       <span class="author-entry" data-authorname="{{author.name}}" data-authorid="{{author.id}}">
         {% if user %}
-        <a href="#" class="black-link edit-author" data-toggle="modal" data-target="#id-modal-author">
+        <a href="#" class="grey-link edit-author" data-toggle="modal" data-target="#id-modal-author">
           {{ author.name}}
         </a>
         {% else %}
+        <span class="grey-text">
           {{ author.name}}
+        </span>
         {% endif %}
       </span> | 
     {% endfor %}

@@ -6,11 +6,13 @@
     {% for book in author.books %}
       <span class="book-entry" data-booktitle="{{book.title}}" data-bookid="{{book.id}}" data-bookauthors="{{book.get_authorids_str()}}">
         {% if user %}
-        <a href="#" class="black-link edit-book" data-toggle="modal" data-target="#id-modal-book">
+        <a href="#" class="grey-link edit-book" data-toggle="modal" data-target="#id-modal-book">
           {{ book.title }}
         </a>
         {% else %}
+        <span class="grey-text">
           {{ book.title }}
+        </span>
         {% endif %}
       </span> |
     {% endfor %}
