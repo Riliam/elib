@@ -28,8 +28,12 @@ $(document).ready(function() {
 
   $("#id-modal-author").on("hidden.bs.modal", function() {
     $("#id-author-form").removeAttr("data-action");
-    $("#id-input-author-book-id").val("");
+    $("#id-input-author-book-title").val("");
     $("#id-author-form").removeAttr("data-booktitle");
+  });
+
+  $("#id-modal-book").on("hidden.bs.modal", function() {
+    
   });
 
 

@@ -120,9 +120,9 @@ def add_author():
     if author_form.validate_on_submit():
         author = Author(name=author_form.name.data)
 
-        bookid = author_form.book_id.data
-        if bookid:
-            book = Book.query.get(bookid)
+        booktitle = author_form.book_title.data
+        if booktitle:
+            book = Book.query.filter_by(title=booktitle).first()
             author.books.append(book)
 
         db_session.add(author)

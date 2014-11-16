@@ -38,14 +38,14 @@ $(document).ready(function() {
     $("#id-add-several-authors").prop("checked", false);
 
     $("#id-author-form").attr("data-action", "add_to_book");
-    $("#id-input-author-book-id").val($("#id-input-book-id").val());
-    $("#id-author-form").attr("data-booktitle", $("#id-input-book-name").val());
+    var booktitle = $("#id-input-book-name").val();
+    $("#id-author-form").attr("data-booktitle", booktitle);
 
     $("#id-book-form").trigger("submit");
 
+    $("#id-input-author-book-title").val(booktitle);
+
     if ($("#id-author-form").attr("data-action") === "add_to_book") {
-      var booktitle;
-      booktitle = $("#id-author-form").attr("data-booktitle");
       if (booktitle != undefined && booktitle.length > 0) {
         $("#id-title-author-form").html("Добавить автора для книги \"" + booktitle + "\"");
       }
